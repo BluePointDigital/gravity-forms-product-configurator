@@ -193,7 +193,15 @@ return false;
 }
 
 foreach ( $form['fields'] as $field ) {
-if ( isset( $field->type ) && 'visual_configurator' === $field->type ) {
+$field_type = '';
+
+if ( is_object( $field ) && isset( $field->type ) ) {
+$field_type = $field->type;
+} elseif ( is_array( $field ) && isset( $field['type'] ) ) {
+$field_type = $field['type'];
+}
+
+if ( 'visual_configurator' === $field_type ) {
 return true;
 }
 }

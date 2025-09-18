@@ -20,12 +20,15 @@ this.element      = element;
 this.canvas       = element.querySelector( '.gf-vpc-canvas' );
 this.context      = this.canvas ? this.canvas.getContext( '2d' ) : null;
 this.hiddenInput  = element.querySelector( '.gf-vpc-result' );
+this.controlContainer = element.querySelector( '.gf-vpc-control-container' );
+this.controlList = element.querySelector( '.gf-vpc-control-list' );
 this.formId       = parseInt( element.getAttribute( 'data-form-id' ), 10 );
 this.fieldId      = parseInt( element.getAttribute( 'data-field-id' ), 10 );
 this.form         = element.closest( 'form' );
 this.imageCache   = new Map();
 this.layerStates  = new Map();
 this.drawScheduled = false;
+this.mountedWrapperIds = new Set();
 }
 
 init() {
@@ -81,6 +84,8 @@ const controls = this.findControls( layer.controlFieldId );
 const state    = this.getLayerState( layer );
 
 state.controls = controls;
+
+this.mountControlWrapper( layer );
 
 controls.forEach( ( control ) => {
 const handler = ( event ) => {
@@ -161,6 +166,30 @@ window.requestAnimationFrame( () => {
 this.drawScheduled = false;
 this.redrawCanvas();
 } );
+}
+
+mountControlWrapper( layer ) {
+if ( ! this.controlList ) {
+return;
+}
+
+const wrapperId = this.getFieldWrapperId( layer.controlFieldId );
+if ( ! wrapperId || this.mountedWrapperIds.has( wrapperId ) ) {
+return;
+}
+
+const wrapper = document.getElementById( wrapperId );
+if ( ! wrapper ) {
+return;
+}
+
+this.mountedWrapperIds.add( wrapperId );
+this.controlList.appendChild( wrapper );
+wrapper.classList.add( 'gf-vpc-control-field' );
+
+if ( this.controlContainer ) {
+this.controlContainer.classList.add( 'gf-vpc-has-controls' );
+}
 }
 
 handleFileControl( layer, control ) {
@@ -388,6 +417,19 @@ this.hiddenInput.value = data;
 } catch ( error ) {
 console.error( 'GF Visual Configurator: Unable to export canvas.', error );
 }
+}
+
+getFieldWrapperId( controlFieldId ) {
+if ( ! controlFieldId ) {
+return '';
+}
+
+const numericId = parseInt( controlFieldId, 10 );
+if ( Number.isNaN( numericId ) || ! numericId ) {
+return '';
+}
+
+return `field_${ this.formId }_${ numericId }`;
 }
 }
 

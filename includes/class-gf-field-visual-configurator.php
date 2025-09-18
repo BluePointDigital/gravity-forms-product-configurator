@@ -97,6 +97,9 @@ return false;
 
 $config      = $this->get_config_settings();
 $config_json = wp_json_encode( $config );
+if ( false === $config_json ) {
+$config_json = '{}';
+}
 $canvas      = isset( $config['canvas'] ) ? $config['canvas'] : array();
 $width       = isset( $canvas['width'] ) ? absint( $canvas['width'] ) : 600;
 $height      = isset( $canvas['height'] ) ? absint( $canvas['height'] ) : 600;
@@ -114,12 +117,15 @@ $width,
 $height
 );
 
+$control_markup = '<div class="gf-vpc-control-container"><ul class="gf-vpc-control-list"></ul></div>';
+
 $container_markup = sprintf(
-'<div class="gf-visual-configurator" data-field-id="%1$d" data-form-id="%2$d" data-config="%3$s">%4$s<div class="gf-vpc-control-container"></div>%5$s</div>',
+'<div class="gf-visual-configurator" data-field-id="%1$d" data-form-id="%2$d" data-config="%3$s">%4$s%5$s%6$s</div>',
 $field_id,
 $form_id,
 esc_attr( $config_json ),
 $canvas_markup,
+$control_markup,
 $hidden_input
 );
 
@@ -352,6 +358,15 @@ return array(
  */
 protected function get_config_settings() {
 $settings = isset( $this->visual_configurator_settings ) ? $this->visual_configurator_settings : array();
+
+if ( is_string( $settings ) ) {
+$decoded = json_decode( wp_unslash( $settings ), true );
+if ( JSON_ERROR_NONE === json_last_error() && is_array( $decoded ) ) {
+$settings = $decoded;
+} else {
+$settings = array();
+}
+}
 
 if ( empty( $settings ) || ! is_array( $settings ) ) {
 $settings = self::get_default_settings();
