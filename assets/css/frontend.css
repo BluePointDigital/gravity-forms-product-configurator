@@ -1,0 +1,29 @@
+.gf-visual-configurator-field {
+margin: 1.5em 0;
+}
+
+.gf-visual-configurator {
+position: relative;
+display: flex;
+flex-direction: column;
+gap: 1em;
+}
+
+.gf-vpc-canvas {
+width: 100%;
+height: auto;
+border: 1px solid #e2e2e2;
+background: #ffffff;
+box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.gf-vpc-control-container {
+display: none;
+}
+
+.gf-vpc-entry-image {
+max-width: 100%;
+height: auto;
+border: 1px solid #e2e2e2;
+border-radius: 4px;
+}
