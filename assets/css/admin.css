@@ -1,0 +1,134 @@
+.gf-vpc-setting-section {
+margin: 1em 0;
+padding: 1em;
+background: #fff;
+border: 1px solid #ccd0d4;
+border-radius: 4px;
+}
+
+.gf-vpc-setting-section h4 {
+margin-top: 0;
+}
+
+.gf-vpc-field-grid {
+display: grid;
+grid-template-columns: 150px 1fr;
+grid-gap: 0.5em 1em;
+align-items: center;
+}
+
+.gf-vpc-field-grid input[type="number"],
+.gf-vpc-field-grid input[type="text"] {
+width: 100%;
+}
+
+.gf-vpc-media-control {
+display: flex;
+gap: 0.5em;
+align-items: center;
+}
+
+.gf-vpc-media-control input[type="text"] {
+flex: 1;
+}
+
+.gf-vpc-layers {
+margin: 1em 0;
+padding: 0;
+list-style: none;
+}
+
+.gf-vpc-layer {
+margin-bottom: 1em;
+border: 1px solid #dcdcdc;
+border-radius: 4px;
+background: #f9f9f9;
+}
+
+.gf-vpc-layer-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0.75em 1em;
+border-bottom: 1px solid #dcdcdc;
+background: #fff;
+}
+
+.gf-vpc-layer-actions {
+display: flex;
+gap: 0.5em;
+align-items: center;
+}
+
+.gf-vpc-layer-body {
+padding: 1em;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 1em;
+}
+
+.gf-vpc-layer-body label span,
+.gf-vpc-layer-position legend {
+font-weight: 600;
+display: block;
+margin-bottom: 0.25em;
+}
+
+.gf-vpc-layer-body input[type="text"],
+.gf-vpc-layer-body select {
+width: 100%;
+}
+
+.gf-vpc-layer-position {
+grid-column: 1 / -1;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+gap: 1em;
+margin: 0;
+padding: 0.5em;
+border: 1px solid #dcdcdc;
+background: #fff;
+}
+
+.gf-vpc-layer-conditional {
+grid-column: 1 / -1;
+display: flex;
+align-items: center;
+gap: 0.5em;
+}
+
+.gf-vpc-layer-overlay,
+.gf-vpc-layer-choice-mapping {
+grid-column: 1 / -1;
+}
+
+.gf-vpc-choice-list {
+margin: 0.5em 0 0;
+padding: 0;
+list-style: none;
+display: grid;
+gap: 0.5em;
+}
+
+.gf-vpc-choice {
+border: 1px solid #dcdcdc;
+border-radius: 4px;
+padding: 0.75em;
+background: #fff;
+}
+
+.gf-vpc-choice-fields {
+display: grid;
+grid-template-columns: 1fr;
+gap: 0.5em;
+}
+
+.gf-vpc-choice .gf-vpc-media-control {
+flex-direction: row;
+}
+
+.gf-vpc-layer-placeholder {
+height: 60px;
+border: 2px dashed #0073aa;
+margin-bottom: 1em;
+}
